@@ -33,7 +33,7 @@ You can also you Kibina to search the trained database.
 
 ## Design Architecture
 
-![](images/architect-1.png)
+![](images/sba-architect.png)
 
 ## Frontend Repository
 
