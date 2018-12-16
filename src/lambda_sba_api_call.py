@@ -84,6 +84,10 @@ def not_found():
 def create_response(body, status_code = HTTPStatus.OK) -> dict:
     return {
         "statusCode" : status_code,
+        "headers": {
+            "Access-Control-Allow-Origin" : "*", 
+            "Access-Control-Allow-Credentials" : True
+        },
         "body" : json.dumps(body) if isinstance(body, (list, dict)) else body
     }
 
