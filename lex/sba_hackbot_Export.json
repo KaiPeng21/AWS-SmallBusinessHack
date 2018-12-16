@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0",
+    "importType": "LEX",
+    "importFormat": "JSON"
+  },
+  "resource": {
+    "name": "sba_hackbot",
+    "version": "2",
+    "intents": [
+      {
+        "name": "sba_help",
+        "version": "2",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "Help",
+          "Help me",
+          "What can you do"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Tell me your business plan. And I will give you information about the chances it can possibly made to Crunchbase top 50k list based on similar projects founded by SBIR.",
+              "groupNumber": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "sba_name",
+        "version": "1",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "what is your name",
+          "how may I call you"
+        ],
+        "slots": [],
+        "conclusionStatement": {
+          "messages": [
+            {
+              "contentType": "PlainText",
+              "content": "Hi, My name is Darwin. How may I help you?",
+              "groupNumber": 1
+            },
+            {
+              "contentType": "PlainText",
+              "content": "My name is Darwin. How may I help you?",
+              "groupNumber": 1
+            },
+            {
+              "contentType": "PlainText",
+              "content": "You can call me Darwin!",
+              "groupNumber": 1
+            },
+            {
+              "contentType": "PlainText",
+              "content": "I am Darwin. I am going to judge your business success rate!",
+              "groupNumber": 1
+            }
+          ]
+        }
+      },
+      {
+        "name": "sba_search",
+        "version": "3",
+        "fulfillmentActivity": {
+          "type": "ReturnIntent"
+        },
+        "sampleUtterances": [
+          "I would like to know my business success rate",
+          "Find business success rate"
+        ],
+        "slots": [
+          {
+            "name": "SBADescription",
+            "slotConstraint": "Required",
+            "slotType": "SBADescription",
+            "slotTypeVersion": "1",
+            "valueElicitationPrompt": {
+              "messages": [
+                {
+                  "contentType": "PlainText",
+                  "content": "What is your business plan?"
+                }
+              ],
+              "maxAttempts": 2,
+              "responseCard": "{\"version\":1,\"contentType\":\"application/vnd.amazonaws.card.generic\",\"genericAttachments\":[]}"
+            },
+            "priority": 1,
+            "sampleUtterances": [
+              "My plan is {SBADescription}"
+            ]
+          }
+        ],
+        "dialogCodeHook": {
+          "uri": "<< arn:aws:lambda: Put your Lambda ARN Here>>",
+          "messageVersion": "1.0"
+        }
+      }
+    ],
+    "slotTypes": [
+      {
+        "description": "sba description",
+        "name": "SBADescription",
+        "version": "1",
+        "enumerationValues": [
+          {
+            "value": "query",
+            "synonyms": []
+          }
+        ],
+        "valueSelectionStrategy": "ORIGINAL_VALUE"
+      }
+    ],
+    "voiceId": "Matthew",
+    "childDirected": false,
+    "locale": "en-US",
+    "idleSessionTTLInSeconds": 300,
+    "clarificationPrompt": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, can you please repeat that?"
+        }
+      ],
+      "maxAttempts": 5
+    },
+    "abortStatement": {
+      "messages": [
+        {
+          "contentType": "PlainText",
+          "content": "Sorry, I could not understand. Goodbye."
+        }
+      ]
+    }
+  }
+}
