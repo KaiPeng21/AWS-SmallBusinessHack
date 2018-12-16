@@ -8,8 +8,17 @@
 - [Setup Development Environment](##Setup%20Development%20Environment)
 - [Testing Application Locally](##Testing%20Application%20Locally)
 - [Deploy your App onto AWS](##Deploy%20your%20App%20onto%20AWS)
-- [App Testing Instructions](##App%20Testing%20Instructions)
 - [Liscense](##Liscense)
+
+##
+
+Chia-Hua Peng - As an AWS Architect and Backend developer, configure AWS resources using CloudFormation, writing modules that interfaces with AWS resources, and ports the API Gateway with Elasticsearch. Also worked on an alternative solution using Lex chatbot.
+
+Martin Maza - As a Fronend Developer developed the entire frontend app and visualizes the trained data in tables and scatter plots.
+
+Nikolay Sorokin - Data Scientist working with Sagemaker, model training, and make data analysis design decisions.
+
+Vitalie Manzul - Data Scientist working with AWS Comprehend and trained customized data.
 
 ## Introduction
 
@@ -158,12 +167,6 @@ Follow the instructions [here](https://docs.aws.amazon.com/lex/latest/dg/import-
 #### Integrating your bot with Slack or other messaging platform
 
 Follow the instructions [here](https://docs.aws.amazon.com/lex/latest/dg/slack-bot-association.html) to integrate your bot with external messaging platform.
-
-## App Testing Instructions
-
-1. Deploy the application by following the above steps.
-2. Put image (jpg or png) or pdf documents to the document store S3 bucket.
-3. Ask the bot to "search for a doc" as shown in the Preview Demo section.
 
 ## Liscense
 
