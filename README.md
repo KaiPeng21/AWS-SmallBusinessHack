@@ -31,6 +31,8 @@ A chatbot which may interface with messaging platform like Slack or Facebook Mes
 ![](images/sba-es.png)
 You can also you Kibina to search the trained database.
 
+[Youtube Link](https://youtu.be/ogVCPvJj3fU)
+
 ## Design Architecture
 
 ![](images/sba-architect.png)
