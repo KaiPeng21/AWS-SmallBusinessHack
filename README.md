@@ -10,7 +10,7 @@
 - [Deploy your App onto AWS](##Deploy%20your%20App%20onto%20AWS)
 - [Liscense](##Liscense)
 
-##
+## Team Darwin
 
 Chia-Hua Peng - As an AWS Architect and Backend developer, configure AWS resources using CloudFormation, writing modules that interfaces with AWS resources, and ports the API Gateway with Elasticsearch. Also worked on an alternative solution using Lex chatbot.
 
@@ -36,6 +36,9 @@ Visualizing the award and probability of success in a scatter plot.
 
 ![](images/bot.gif)
 A chatbot which may interface with messaging platform like Slack or Facebook Messenger.
+
+![](images/slack.gif)
+Chatbot - Slack Integration
 
 ![](images/sba-es.png)
 You can also you Kibina to search the trained database.
