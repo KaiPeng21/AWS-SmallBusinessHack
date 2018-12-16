@@ -135,20 +135,20 @@ Resources:
             Method: get
 
 
-  # LexHookLambda:
-  #   Type: AWS::Serverless::Function
-  #   Properties:
-  #     FunctionName: !Sub LexHookLambda-${ENVIRONMENT}
-  #     Handler: lambda_lex_hook.lambda_handler
-  #     Runtime: python3.6
-  #     CodeUri: dist
-  #     MemorySize: 128
-  #     Timeout: 20
-  #     Role: !GetAtt ESMLExecLambdaRole.Arn
-  #     Environment:
-  #       Variables:
-  #         ES_HOST: !GetAtt ElasticsearchDomain.DomainEndpoint
-  #         ES_PORT: 443
+  SBALexHookLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub SBALexHookLambda-${ENVIRONMENT}
+      Handler: lambda_sba_lex.lambda_handler
+      Runtime: python3.6
+      CodeUri: dist
+      MemorySize: 128
+      Timeout: 20
+      Role: !GetAtt SBAExecLambdaRole.Arn
+      Environment:
+        Variables:
+          ES_HOST: !GetAtt SBAElasticsearchDomain.DomainEndpoint
+          ES_PORT: 443
 
   # LexExampleLambda:
   #   Type: AWS::Serverless::Function

@@ -62,11 +62,11 @@ def abstract(event, context):
         num_of_docs = query_params["n"]
 
     descrioption = path_params["description"]
-    keywords = detect_keyphrases(descrioption)
-    if len(keywords) > 0:
-        resp = sbadoc.search_document_by_keywords(keywords, num_of_docs=num_of_docs).json()
-    else:
-        resp = sbadoc.search_document_by_keywords(descrioption.split(), num_of_docs=num_of_docs).json()
+    # keywords = detect_keyphrases(descrioption)
+    # if len(keywords) > 0:
+    #     resp = sbadoc.search_document_by_keywords(keywords, num_of_docs=num_of_docs).json()
+    # else:
+    resp = sbadoc.search_document_by_keywords(descrioption.split(), num_of_docs=num_of_docs).json()
     
     hit_list = sorted(resp["hits"]["hits"], key=lambda x: (-x["_score"], -x["_source"]["probability"]))
     
