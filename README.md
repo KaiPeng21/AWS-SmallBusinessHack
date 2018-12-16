@@ -16,9 +16,9 @@ Chia-Hua Peng - As an AWS Architect and Backend developer, configure AWS resourc
 
 Martin Maza - As a Fronend Developer developed the entire frontend app and visualizes the trained data in tables and scatter plots.
 
-Nikolay Sorokin - Data Scientist working with Sagemaker, model training, and make data analysis design decisions.
+Vitalie Manzul - Data Scientist working with Sagemaker, model training, and make data analysis design decisions.
 
-Vitalie Manzul - Data Scientist working with AWS Comprehend and trained customized data.
+Nikolay Sorokin - Data Scientist working with AWS Comprehend and trained customized data.
 
 ## Introduction
 
