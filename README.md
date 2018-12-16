@@ -25,7 +25,7 @@ Frontend with a search engine and a filter table.
 ![](images/sba-frontend2.png)
 Visualizing the award and probability of success in a scatter plot.
 
-![](images/bot.png)
+![](images/bot.gif)
 A chatbot which may interface with messaging platform like Slack or Facebook Messenger.
 
 ![](images/sba-es.png)
