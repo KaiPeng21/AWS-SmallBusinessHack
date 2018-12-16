@@ -1,0 +1,167 @@
+
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Elasticsearch and Machine Learning Example
+Parameters:
+  ENVIRONMENT:
+    Type: String
+
+Resources:
+
+  SBAExecLambdaRole:
+    Type: "AWS::IAM::Role"
+    Properties: 
+      AssumeRolePolicyDocument: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Effect: "Allow"
+            Principal: 
+              Service: 
+                - "lambda.amazonaws.com"
+            Action: 
+              - "sts:AssumeRole"
+      Path: "/"
+      Policies: 
+        - 
+          PolicyName: "SBAExecLambdaRole"
+          PolicyDocument: 
+            Version: "2012-10-17"
+            Statement: 
+              - 
+                Effect: "Allow"
+                Action: "es:*"
+                Resource: "*"
+              - 
+                Effect: "Allow"
+                Action: "s3:*"
+                Resource: "*"
+              - 
+                Effect: "Allow"
+                Action: "rekognition:*"
+                Resource: "*"
+              - 
+                Effect: "Allow"
+                Action: "comprehend:*"
+                Resource: "*"
+              - 
+                Effect: "Allow"
+                Action: "apigateway:*"
+                Resource: "*"
+              - 
+                Effect: "Allow"
+                Action: "polly:*"
+                Resource: "*"
+      ManagedPolicyArns: 
+        - "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+        
+  # SBAStoreS3:
+  #   Type: AWS::S3::Bucket
+  #   Properties:
+  #     BucketName: !Sub "sba-${AWS::StackName}-${AWS::AccountId}-s3-${ENVIRONMENT}"
+
+  # SBAS3BucketPolicy: 
+  #   Type: AWS::S3::BucketPolicy
+  #   Properties: 
+  #     Bucket: !Ref SBAStoreS3
+  #     PolicyDocument: 
+  #       Statement: 
+  #         - 
+  #           Sid: SBAS3PolicyDoc
+  #           Effect: "Allow"
+  #           Action: "s3:GetObject"
+  #           Principal: "*"
+  #           Resource: !Join ["", ["arn:aws:s3:::", !Ref SBAS3BucketPolicy, "/*"]]
+
+  SBAElasticsearchDomain: 
+      Type: "AWS::Elasticsearch::Domain"
+      Properties:
+        DomainName: !Sub "${AWS::StackName}-${AWS::AccountId}-${ENVIRONMENT}"
+        ElasticsearchClusterConfig: 
+          DedicatedMasterEnabled: false
+          InstanceCount: 1
+          InstanceType: t2.small.elasticsearch
+          ZoneAwarenessEnabled: false
+        EBSOptions: 
+          EBSEnabled: true
+          Iops: 0
+          VolumeSize: 10
+          VolumeType: "gp2"
+        ElasticsearchVersion: "6.3"
+        SnapshotOptions: 
+          AutomatedSnapshotStartHour: "0"
+        AdvancedOptions:
+          rest.action.multi.allow_explicit_index: 'true'
+        AccessPolicies:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Allow"
+              Principal:
+                AWS: "*"
+              Action: "es:*"
+              Resource: "*"
+          #TODO: Set authentication/ vpc
+
+  SBAApiLambda:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub SBAApiLambda-${ENVIRONMENT}
+      Handler: lambda_sba_api_call.lambda_handler
+      Runtime: python3.6 
+      CodeUri: dist
+      MemorySize: 128
+      Timeout: 30
+      Role: !GetAtt SBAExecLambdaRole.Arn
+      Environment:
+        Variables:
+          ES_HOST: !GetAtt SBAElasticsearchDomain.DomainEndpoint
+          ES_PORT: 443
+      Events:
+        GetIndex:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+        GetByCompanyName:
+          Type: Api
+          Properties:
+            Path: /company/{companyName}
+            Method: get
+        GetByAbstract:
+          Type: Api
+          Properties:
+            Path: /abstract/{description}
+            Method: get
+
+
+  # LexHookLambda:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     FunctionName: !Sub LexHookLambda-${ENVIRONMENT}
+  #     Handler: lambda_lex_hook.lambda_handler
+  #     Runtime: python3.6
+  #     CodeUri: dist
+  #     MemorySize: 128
+  #     Timeout: 20
+  #     Role: !GetAtt ESMLExecLambdaRole.Arn
+  #     Environment:
+  #       Variables:
+  #         ES_HOST: !GetAtt ElasticsearchDomain.DomainEndpoint
+  #         ES_PORT: 443
+
+  # LexExampleLambda:
+  #   Type: AWS::Serverless::Function
+  #   Properties:
+  #     FunctionName: !Sub LexExampleLambda-${ENVIRONMENT}
+  #     Handler: lambda_lex_example.lambda_handler
+  #     Runtime: python3.6
+  #     CodeUri: dist
+  #     MemorySize: 128
+  #     Timeout: 20
+  #     Role: !GetAtt ESMLExecLambdaRole.Arn
+
+  
+
+
+  

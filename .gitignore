@@ -1,0 +1,13 @@
+
+build
+dist
+.DS_Store
+.pytest_cache
+.vscode
+.venv
+.pytest_cache
+
+deprecated
+private*.json
+
+dummy*
