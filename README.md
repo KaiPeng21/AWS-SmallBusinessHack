@@ -152,6 +152,10 @@ $ ./deploy.sh <deployment-stage>
 
 A [deploy.sh](deploy.sh) shell script is provided to help building the next stage CloudFormation template from [template.yaml](template.yaml) and creating your CloudFormation stack on AWS.
 
+#### Adding sample sagemaker output
+
+Move ['example-sagemaker-output.json'](/example-sagemaker-output.json) to the src folder, rename the file to **'dummy-output.json'**, and run json_es_import.py from the [src/](/src) directory.
+
 #### Importing Amazon Lex 
 
 CloudFormation does not yet have an Amazon Lex resource and property types. An Amazon Lex template json is provided in the [lex/](/lex) directory. 
