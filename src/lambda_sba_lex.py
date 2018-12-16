@@ -47,9 +47,9 @@ def make_response(event : dict):
             message_content="Would you give a some description about your business plan?"
         )
 
-    keyphrases = detect_keyphrases(text=intent_slots.get("SBADescription"))
-    if len(keyphrases) == 0:
-        keyphrases = intent_slots.get("SBADescription").split()
+    #keyphrases = detect_keyphrases(text=intent_slots.get("SBADescription"))
+    #if len(keyphrases) == 0:
+    keyphrases = intent_slots.get("SBADescription").split()
     res = sbadoc.search_document_by_keywords(keywords=keyphrases, num_of_docs=5).json()
 
     data_list = [hit["_source"] for hit in res["hits"]["hits"]]
